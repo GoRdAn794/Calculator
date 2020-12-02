@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="tab.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+<div class="col-lg-4">
+</div>
+<div class="col-lg-4 mt-5">          
+  <table class="table table-light tab">
+    <thead>
+      <tr>
+        <th colspan="6">
+          <input type="text" class="form-control" readonly="" id="result">
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="button" value="7" class="butn" onclick="calculate(7)"></td>
+        <td><input type="button" value="8" class="butn" onclick="calculate(8)"></td>
+        <td><input type="button" value="9" class="butn" onclick="calculate(9)"></td>
+        <td><input type="button" value="&divide" class="butn" onclick="operation('/')"></td>
+        <td><input type="button" value="^" class="butn" onclick="operation('^')"></td>
+        <td><input type="button" value="OFF" class="butn" onclick="off()"></td>
+        
+
+      </tr>
+      <tr>
+        <td><input type="button" value="4" class="butn" onclick="calculate(4)"></td>
+        <td><input type="button" value="5" class="butn" onclick="calculate(5)"></td>
+        <td><input type="button" value="6" class="butn" onclick="calculate(6)"></td>
+        <td><input type="button" value="&times" class="butn" onclick="operation('*')"></td>
+         <td><input type="button" value="%" class="butn" onclick="operation('%')"></td>
+         <td><input type="button" value="ON" class="butn1" onclick="on()"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="1"class="butn" onclick="calculate(1)"></td>
+        <td><input type="button" value="2"class="butn" onclick="calculate(2)"></td>
+        <td><input type="button" value="3"class="butn" onclick="calculate(3);"></td>
+        <td><input type="button" value="-"class="butn" onclick="operation('-');"></td>
+        <td colspan="3"><input type="button" value="."class="butn" onclick="calculate('.');" style="margin-left: 25px; width: 50px;"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="0"class="butn" onclick=" calculate(0);"></td>
+        <td><input type="button" value="+"class="butn" onclick="operation('+');"></td>
+        <td><input type="button" value="="class="butn" onclick="operation('=');"></td>
+        <td class="col"><input type="button" value="AC" class="butn" onclick="clea()"></td>
+         <td class="col" colspan="3"><input type="button" value="DEL" class="butn" onclick="back()" style="width: 100px;"></td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col-lg-4">
+  </div>
+</div>
+</div>
+<script>
+	function clea()
+	{
+		document.getElementById("result").value="0";
+		// This Section Clears the value of calculator from varibles
+		displayVal=" ";
+		previousVal=0;
+		opt='+';
+		
+
+	}
+	var displayVal=" ";
+	var previousVal=0;
+	var opt='+';
+	var result;
+	function calculate(operand){
+		displayVal+=operand;
+		document.getElementById("result").value=displayVal;
+	}
+
+	function operation(operator)
+	{
+		console.log(previousVal);
+			switch(opt)
+			{
+			case '+':
+			result=parseFloat(parseFloat(previousVal)+ parseFloat(displayVal));		
+			console.log(result);
+			document.getElementById("result").value=result;
+			break;
+			case '-':
+			result=parseFloat(parseFloat(previousVal)-parseFloat(displayVal));
+			console.log(result);
+			document.getElementById("result").value=result;
+			break;
+			case '*':
+			result=parseFloat(parseFloat(previousVal)*parseFloat(displayVal));
+			console.log(result);
+			document.getElementById("result").value=result;
+			break;
+			case '%':
+			result=parseFloat((parseFloat(previousVal))/100);
+			console.log(result);
+			document.getElementById("result").value=result;
+			break;
+			case '/':
+			result=parseFloat(parseFloat(previousVal)/ parseFloat(displayVal));
+			console.log(result);
+			document.getElementById("result").value=result;
+			break;
+			case '^':
+			result=parseFloat(Math.pow(parseFloat(previousVal),parseFloat(displayVal)));
+			console.log(result);
+			document.getElementById("result").value=result;
+			break;
+			case '=':
+			result=parseFloat(parseFloat(previousVal)=parseFloat(displayVal));
+			console.log(result);
+			document.getElementById("result").value=result;
+			document.getElementById("result").value=0;
+
+			break;	
+		}
+		previousVal=result;
+		opt=operator;
+		displayVal=" ";
+	}
+	function back() {
+    var value = document.getElementById("result").value;
+    document.getElementById("result").value = value.substr(0, value.length - 1);
+    displayVal = value.substr(0, value.length - 1);
+}
+	function off()
+	{
+		document.getElementById("result").value=" ";
+		const button=document.querySelectorAll(".butn");
+		for(i=0;i<button.length;i++)
+		{
+			button[i].disabled=true;
+		}
+		
+	}
+	function on()
+	{
+		document.getElementById("result").value="0";
+		const button=document.querySelectorAll(".butn");
+		for(i=0;i<button.length;i++)
+		{
+			button[i].disabled=false;
+		}
+	}
+</script>
+</body>
+</html>
